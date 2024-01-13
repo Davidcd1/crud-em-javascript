@@ -190,7 +190,7 @@ $myRegister.addEventListener('submit', function createRegisterController(eventIn
     const passwordR = document.querySelector('input[name="passwordR"]').value;
 
     if(nameR && emailR && passwordR){
-        deleta = miniRedeSocial.register(nameR, emailR, passwordR);
+        deleta = miniRedeSocial.register(emailR, nameR, passwordR);
         if(deleta){
             $myRegister.classList.remove('show');
             $myRegister.classList.add('hide');

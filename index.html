@@ -23,9 +23,9 @@
                     <input name="password" type="password"  id="password" placeholder="Senha">
                     
                     <button name="submit">Login</button>
-                    <a href="#register" class="btn-register">Registre-se</a>
+                    <a href="#register" onclick="clickregister()" class="btn-register">Registre-se</a>
                 </form>
-                <form name="register" id="register" class="show">
+                <form name="register" id="cregister" class="hide">
                     <label>Registrar</label>
                     <input type="email" name="emailR" id="emailR" placeholder="Email">
                     <input type="text" name="nameR" id="nameR" placeholder="Nome">
@@ -55,5 +55,6 @@
             </section>
         </main>
         <script src="crud.js"></script>
+
     </body>
 </html>

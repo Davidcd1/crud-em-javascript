@@ -1,5 +1,5 @@
 
-const miniRedeSocial = {
+const app = {
     users: [
         {  
             id: 0,
@@ -17,7 +17,7 @@ const miniRedeSocial = {
     ],
 
     login(username, password) {
-        const user = miniRedeSocial.users.find((currentUser) => currentUser.username === username);
+        const user = app.users.find((currentUser) => currentUser.username === username);
         if (user) {
             if (user.password === password) {
                 // Login successful
@@ -31,14 +31,14 @@ const miniRedeSocial = {
     },
     register(email, name, password){
         rep = false; 
-        const usersList = miniRedeSocial.users.filter((currentUser) => {
+        const usersList = app.users.filter((currentUser) => {
             if(currentUser.email === email && currentUser.name === name){
                 rep = true;
             }
         });
         if(rep === false){
-            miniRedeSocial.users.push({
-                id: miniRedeSocial.users.length,
+            app.users.push({
+                id: app.users.length,
                 email: email,
                 username: name,
                 password: password
@@ -50,15 +50,15 @@ const miniRedeSocial = {
     },
 
     ReadPosts(){
-        miniRedeSocial.posts.forEach(({ id, owner, content }) => {
-            miniRedeSocial.createPost({ id, owner: owner, content: content }, true);
+        app.posts.forEach(({ id, owner, content }) => {
+            app.createPost({ id, owner: owner, content: content }, true);
         })
     },
 
     createPost(datas, htmlOnly = false){
         const internid = Date.now();
         if(!htmlOnly){
-            miniRedeSocial.posts.push({
+            app.posts.push({
                 id: datas.id || internid,
                 owner: datas.owner, 
                 content: datas.content
@@ -80,7 +80,7 @@ const miniRedeSocial = {
     },
 
     updateContent(id, newContent){
-        const post = miniRedeSocial.posts.find((post) => {
+        const post = app.posts.find((post) => {
             return post.id === id;
         });
     
@@ -92,10 +92,10 @@ const miniRedeSocial = {
     },
 
     deletePost(id){
-        const updatedlist = miniRedeSocial.posts.filter((currentPost) => {
+        const updatedlist = app.posts.filter((currentPost) => {
             return currentPost.id !== Number(id);
         });
-        miniRedeSocial.posts = updatedlist;
+        app.posts = updatedlist;
     },
 
     activatePostEdit(id) {
@@ -103,7 +103,7 @@ const miniRedeSocial = {
 
         if (postElement) {
             // Obtém a postagem atual do array miniRedeSocial.posts
-            const currentPost = miniRedeSocial.posts.find(post => post.id === Number(id));
+            const currentPost = app.posts.find(post => post.id === Number(id));
             id = currentPost.id;
             owner = currentPost.owner;
 
@@ -132,11 +132,11 @@ const miniRedeSocial = {
                             </div>
                         </li>
                     `;
-                    miniRedeSocial.updateContent(id, updatedContent);
+                    app.updateContent(id, updatedContent);
                 });
 
                 postElement.querySelector('.btn-cancel').addEventListener('click', () => {
-                    miniRedeSocial.cancelUpdate(id, currentPost.content);
+                    app.cancelUpdate(id, currentPost.content);
                 });
             } else {
                 console.error(`Post com ID "${id}" não encontrado`);
@@ -149,7 +149,7 @@ const miniRedeSocial = {
     cancelUpdate(id, content){
         const postElement = document.querySelector(`li[data-id="${id}"]`);
         if(postElement){
-            const currentPost = miniRedeSocial.posts.find(post => post.id === Number(id));
+            const currentPost = app.posts.find(post => post.id === Number(id));
             postElement.innerHTML = `
                 <div class="listbuttonv">
                     <button class="btn-edit">Edit</button>
@@ -164,10 +164,6 @@ const miniRedeSocial = {
     }  
 }
 
-// [READ]
-/**miniRedeSocial.posts.forEach(({ owner, content }) => {
-    miniRedeSocial.createPost({ owner: owner, content: content }, false);
-})**/
 
 // [CREATE]
 const $myForm = document.querySelector('form[name="cpost"]');
@@ -177,7 +173,7 @@ const $myLogin = document.querySelector('form[name="login"]');
 $myForm.addEventListener('submit', function createPostController(eventInfo){
     eventInfo.preventDefault();
     const $createPostField = document.querySelector('textarea[name="fieldPost"]').value;
-    miniRedeSocial.createPost({owner: 'admin', content: $createPostField}, false);
+    app.createPost({owner: 'admin', content: $createPostField}, false);
 });
 
 $myRegister.addEventListener('submit', function createRegisterController(eventInfo){
@@ -190,8 +186,11 @@ $myRegister.addEventListener('submit', function createRegisterController(eventIn
     const passwordR = document.querySelector('input[name="passwordR"]').value;
 
     if(nameR && emailR && passwordR){
-        deleta = miniRedeSocial.register(emailR, nameR, passwordR);
+        deleta = app.register(emailR, nameR, passwordR);
         if(deleta){
+            loginn = document.getElementById("clogin");
+            loginn.classList.remove('hide');
+            login.classList.add('show');
             $myRegister.classList.remove('show');
             $myRegister.classList.add('hide');
         }
@@ -206,7 +205,7 @@ $myLogin.addEventListener('submit', function createLoginController(eventInfo){
     const password = document.querySelector('input[name="password"]').value;
     if(name){
         if(password){
-            var isvalid = miniRedeSocial.login(name, password);
+            var isvalid = app.login(name, password);
             if(isvalid !== 0){
                 alert(isvalid);
             }else{
@@ -236,10 +235,20 @@ document.querySelector('.postsList').addEventListener('click', function (eventIn
     
 
     if(isBtnDeleteClick){
-        miniRedeSocial.deletePost(id);
+        app.deletePost(id);
         currentElementParent.remove();
     }
     if(isBtnEditClick){
-        miniRedeSocial.activatePostEdit(id);
+        app.activatePostEdit(id);
     }
 });
+
+
+function clickregister(){
+    registerr = document.getElementById("cregister");
+    register.classList.remove("hide");
+    register.classList.add("show");
+    loginn = document.getElementById("clogin");
+    loginn.classList.add("hide");
+    loginn.classList.remove("show");
+}

@@ -5,17 +5,28 @@
         <meta http-equiv="X-UA-Compatible" content="IE=7">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
-        <title>Rede Social</title>
+        <title>CRUD</title>
     </head>
     <body>
         <header>
             <nav>
                 <div>
-                    <h1>Forum</h1>
+                    <h1 id="title">CRUD</h1>
                 </div>
             </nav>
+            <div class="conf">
+                <img src="images/gear.ico" alt="">
+            </div>
         </header>
         <main>
+            <section id="conf hide">
+                <ul>
+                    <li>Mudar Foto</li>
+                    <li>Meus Posts</li>
+                    <li></li>
+                    <li>Sair</li>
+                </ul>
+            </section>
             <section class="login show">
                 <form name="login" id="clogin" class="show">
                     <label>Entrar</label>
@@ -23,7 +34,7 @@
                     <input name="password" type="password"  id="password" placeholder="Senha">
                     
                     <button name="submit">Login</button>
-                    <a href="#register" onclick="clickregister()" class="btn-register">Registre-se</a>
+                    <a href="#register" onclick="clickregister()" class="btn-register">Registrar-se</a>
                 </form>
                 <form name="register" id="cregister" class="hide">
                     <label>Registrar</label>
@@ -36,8 +47,8 @@
             <section class="posts hide">
                 <div id="user">
                     <section id="perfil">
-                        <img src="images/perfil.jpeg" alt="">
-                        <p id="name">None<p>
+                        <img id="photo-post" src="images/perfil.jpeg" alt="">
+                        <p id="namep">None<p>
                     </section>
                 </div>
                 <div id="posts">
@@ -55,6 +66,6 @@
             </section>
         </main>
         <script src="crud.js"></script>
-
+        <script src="func.js"></script>
     </body>
 </html>

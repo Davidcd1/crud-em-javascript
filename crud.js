@@ -5,7 +5,8 @@ const app = {
             id: 0,
             email: 'admin@admin.com',
             username: 'admin',
-            password: '1234'
+            password: '1234',
+            photo: 'images/none.png'
         },
     ],
     posts: [
@@ -21,6 +22,10 @@ const app = {
         if (user) {
             if (user.password === password) {
                 // Login successful
+                const nome = document.getElementById("namep");
+                nome.innerHTML = username;
+                photo = document.getElementById("photo-post");
+                photo.src = user.photo;
                 return 0;
             } else {
                 return "Senha incorreta!";
@@ -37,11 +42,13 @@ const app = {
             }
         });
         if(rep === false){
+            id = app.users.length;
             app.users.push({
-                id: app.users.length,
+                id: id,
                 email: email,
                 username: name,
-                password: password
+                password: password,
+                photo: 'images/none.png'
             });
             return true;
         }else{
@@ -190,7 +197,7 @@ $myRegister.addEventListener('submit', function createRegisterController(eventIn
         if(deleta){
             loginn = document.getElementById("clogin");
             loginn.classList.remove('hide');
-            login.classList.add('show');
+            loginn.classList.add('show');
             $myRegister.classList.remove('show');
             $myRegister.classList.add('hide');
         }
@@ -219,6 +226,8 @@ $myLogin.addEventListener('submit', function createLoginController(eventInfo){
                 const forum = document.getElementsByClassName('posts')[0];
                 forum.classList.remove('hide');
                 forum.classList.add('show');
+
+                
             }
         }
     }
@@ -243,12 +252,3 @@ document.querySelector('.postsList').addEventListener('click', function (eventIn
     }
 });
 
-
-function clickregister(){
-    registerr = document.getElementById("cregister");
-    register.classList.remove("hide");
-    register.classList.add("show");
-    loginn = document.getElementById("clogin");
-    loginn.classList.add("hide");
-    loginn.classList.remove("show");
-}

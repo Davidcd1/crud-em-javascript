@@ -6,7 +6,3 @@ function clickregister(){
     loginn.classList.add("hide");
     loginn.classList.remove("show");
 }
-
-function uploadfile(){
-    console.log();
-}
